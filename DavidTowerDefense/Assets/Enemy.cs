@@ -24,5 +24,11 @@ public class Enemy : MonoBehaviour
         {
             currentPoint++; // set our current point to be +1
         }
+
+        if(health <= 0)
+        {
+            FindObjectOfType<GameManager>().gold += 5; // award player with gold
+            Destroy(gameObject); // destroy enemy
+        }
     }
 }

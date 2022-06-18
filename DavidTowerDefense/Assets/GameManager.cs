@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Building towerToPlace; // the tower we want to place
     public CustomCursor customCursor; // access to the custom cursor to show and hide it
     public Tile[] tiles; // list/array of all of our tiles
+    public Text moneyAmount; // to display our money
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moneyAmount.text = "Gold: " + gold; // will constantly update to display how much gold we have
+
         if(Input.GetMouseButtonDown(0) && towerToPlace != null) // left click, and we have a tower on our mouse
         {
             Tile nearestTile = null; // the closest tile to our mouse
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour
             customCursor.GetComponent<SpriteRenderer>().sprite = tower.GetComponent<SpriteRenderer>().sprite;
             Cursor.visible = false; // hides the arrow pointer cursor
             towerToPlace = tower; // set the tower to place to be this tower we're buying
+            gold -= tower.cost; // subtract towers cost from our gold
         }
     }
 }
