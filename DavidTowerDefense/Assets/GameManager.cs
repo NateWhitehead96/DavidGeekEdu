@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public CustomCursor customCursor; // access to the custom cursor to show and hide it
     public Tile[] tiles; // list/array of all of our tiles
     public Text moneyAmount; // to display our money
+    public Text waveCounter; // display what wave we're on
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         moneyAmount.text = "Gold: " + gold; // will constantly update to display how much gold we have
-
+        waveCounter.text = "Wave: " + FindObjectOfType<EnemySpawner>().wave; // display the current wave
         if(Input.GetMouseButtonDown(0) && towerToPlace != null) // left click, and we have a tower on our mouse
         {
             Tile nearestTile = null; // the closest tile to our mouse
