@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject EnemyToSpawn; // what enemy we want to spawn
+    public GameObject[] EnemyToSpawn; // what enemy we want to spawn
     public float timer; // how fast we spawn enemies
 
     public int numberOfEnemiesToSpawn; // how many enemies we spawn
@@ -22,7 +22,19 @@ public class EnemySpawner : MonoBehaviour
         if(timer >= 1 && numberOfEnemiesToSpawn > 0)
         {
             numberOfEnemiesToSpawn--; // subtract from the number of enemies for the wave
-            Instantiate(EnemyToSpawn, transform.position, transform.rotation); // spawn enemy
+            if(wave < 4) // any wave before wave 4 will spawn our fist enemy type
+            {
+                Instantiate(EnemyToSpawn[0], transform.position, transform.rotation); // spawn enemy
+            }
+            if(wave > 3 && wave < 6) // spawn the 2nd enemy type from wave 4 - 5
+            {
+                Instantiate(EnemyToSpawn[1], transform.position, transform.rotation); // spawn enemy
+            }
+            if(wave > 5)
+            {
+                int randomEnemy = Random.Range(0, EnemyToSpawn.Length); // find a random enemy to spawn
+                Instantiate(EnemyToSpawn[randomEnemy], transform.position, transform.rotation); // spawn new random enemy
+            }
             timer = 0; // reset timer
             if(numberOfEnemiesToSpawn == 0) // spawned all of the enemies
             {
@@ -30,7 +42,6 @@ public class EnemySpawner : MonoBehaviour
             }
         }
         timer += Time.deltaTime; // count up time
-        // Eventually we'll have waves and only spawn certain enemies on a wave
     }
 
     IEnumerator StartNextWave()

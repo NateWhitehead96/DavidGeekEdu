@@ -30,5 +30,11 @@ public class Enemy : MonoBehaviour
             FindObjectOfType<GameManager>().gold += 5; // award player with gold
             Destroy(gameObject); // destroy enemy
         }
+
+        if(currentPoint >= checkpoints.points.Length) // when the enemy hits the last point
+        {
+            FindObjectOfType<LoseCondition>().lives--; // lose 1 life
+            Destroy(gameObject); // destroy the enemy
+        }
     }
 }
