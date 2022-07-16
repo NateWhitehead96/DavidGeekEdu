@@ -22,6 +22,7 @@ public class TowerAim : MonoBehaviour
 
         if(timer >= reloadSpeed) // if the timer is at our reload time
         {
+            SoundEffects.instance.shootSound.Play(); // play the shoot sound
             GameObject newProjectile = Instantiate(projectile, transform.position, transform.rotation); // spawns the projectile
             newProjectile.GetComponent<Projectile>().target = enemiesInRange[0].transform; // set the proj to go to target
             timer = 0; // reset timer

@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
         if(health <= 0)
         {
             FindObjectOfType<GameManager>().gold += 5; // award player with gold
+            SoundEffects.instance.enemyDie.Play(); // play the enemy dying sound
             Destroy(gameObject); // destroy enemy
         }
 

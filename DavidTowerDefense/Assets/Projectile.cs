@@ -15,6 +15,8 @@ public class Projectile : MonoBehaviour
     public Type type; // what type of projectile it is
 
     public LayerMask layer; // to help with aoe projectiles, its the layer all enemies share
+
+    public GameObject explosion; // explosion effect we want to play
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,7 @@ public class Projectile : MonoBehaviour
                 {
                     enemies[i].GetComponent<Enemy>().health--; // subtract health
                 }
+                Instantiate(explosion, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
             if (type == Type.Arrow) // how our arrow tower collides
