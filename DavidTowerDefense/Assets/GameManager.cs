@@ -12,15 +12,22 @@ public class GameManager : MonoBehaviour
     public Tile[] tiles; // list/array of all of our tiles
     public Text moneyAmount; // to display our money
     public Text waveCounter; // display what wave we're on
+    public GameObject PauseCanvas; // access to the pause canvas
     // Start is called before the first frame update
     void Start()
     {
         customCursor.gameObject.SetActive(false); // hide the custom cursor
+        PauseCanvas.SetActive(false); // hide the canvas by default
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            PauseCanvas.SetActive(true); // show canvas
+            Time.timeScale = 0; // stop time from updating
+        }
         moneyAmount.text = "Gold: " + gold; // will constantly update to display how much gold we have
         waveCounter.text = "Wave: " + FindObjectOfType<EnemySpawner>().wave; // display the current wave
         if(Input.GetMouseButtonDown(0) && towerToPlace != null) // left click, and we have a tower on our mouse

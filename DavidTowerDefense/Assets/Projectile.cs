@@ -5,7 +5,8 @@ using UnityEngine;
 public enum Type // it knows what type of projectile this will be
 {
     Arrow,
-    Cannon
+    Cannon,
+    Sniper
 }
 
 public class Projectile : MonoBehaviour
@@ -26,11 +27,19 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target == null) // the target is either dead or not there any more, destroy the projectile
+        if (type == Type.Sniper)
         {
-            Destroy(gameObject);
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime); // move the bullet towards the enemy its aiming at
+
         }
-        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime); // move projectile
+        else if (type != Type.Sniper)
+        {
+            if (target == null) // the target is either dead or not there any more, destroy the projectile
+            {
+                Destroy(gameObject);
+            }
+            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime); // move projectile
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -51,6 +60,10 @@ public class Projectile : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Enemy>().health--; // decrease the health of the enemy
                 Destroy(gameObject); // destroy projectile
+            }
+            if (type == Type.Sniper) // how our arrow tower collides
+            {
+                collision.gameObject.GetComponent<Enemy>().health -= 4; // decrease the health of the enemy
             }
         }
     }

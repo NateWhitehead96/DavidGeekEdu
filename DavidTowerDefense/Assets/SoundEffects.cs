@@ -20,6 +20,7 @@ public class SoundEffects : MonoBehaviour
 
     public AudioSource enemyDie;
     public AudioSource shootSound;
+    public float volume; // the volume of the things
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class SoundEffects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        enemyDie.volume = volume;
+        shootSound.volume = volume;
     }
 }
