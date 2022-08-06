@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
     public LayerMask layer; // to help with aoe projectiles, its the layer all enemies share
 
     public GameObject explosion; // explosion effect we want to play
+    float timer; // to know when to kill bullets that pierce
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,7 @@ public class Projectile : MonoBehaviour
         {
             if (target == null) // the target is either dead or not there any more, destroy the projectile
             {
+                target = transform;
                 Destroy(gameObject);
             }
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime); // move projectile
@@ -61,6 +63,13 @@ public class Projectile : MonoBehaviour
                 collision.gameObject.GetComponent<Enemy>().health--; // decrease the health of the enemy
                 Destroy(gameObject); // destroy projectile
             }
+            
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Enemy>())
+        {
             if (type == Type.Sniper) // how our arrow tower collides
             {
                 collision.gameObject.GetComponent<Enemy>().health -= 4; // decrease the health of the enemy
