@@ -54,12 +54,21 @@ public class GameManager : MonoBehaviour
                 customCursor.gameObject.SetActive(false); // hide the custom cursor
             }
         }
+        // Refunding towers on our mouse
+        if(Input.GetMouseButtonDown(1) && towerToPlace != null)
+        {
+            gold += towerToPlace.cost; // refund cost
+            towerToPlace = null; // get rid of the tower from our mouse
+            Cursor.visible = true; // make our mouse visible again
+            customCursor.gameObject.SetActive(false); // hide custom cursor
+        }
     }
 
     // Buying tower function for a button press
     public void BuyTower(Building tower)
     {
-        if(gold >= tower.cost)
+        // only "buy" a tower if we can afford and dont have another tower on our mouse
+        if(gold >= tower.cost && towerToPlace == null)
         {
             customCursor.gameObject.SetActive(true); // makes the cursor visible
             // set the cursor image to be the same as the tower
