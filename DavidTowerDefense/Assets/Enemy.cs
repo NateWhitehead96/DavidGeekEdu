@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public int health; // how many hits they can take
     public int currentPoint; // what checkpoint they are currently moving to
     public Slider healthBar; // access to the floating health bar
+    public Animator anim; // link to our animation controller
+    public bool dying; // help us know when the enemy dies
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +31,10 @@ public class Enemy : MonoBehaviour
             currentPoint++; // set our current point to be +1
         }
 
-        if(health <= 0)
+        if(health <= 0 && dying == false)
         {
-            FindObjectOfType<GameManager>().gold += 5; // award player with gold
-            SoundEffects.instance.enemyDie.Play(); // play the enemy dying sound
-            Destroy(gameObject); // destroy enemy
+            StartCoroutine(EnemyDying());
+            
         }
 
         if(currentPoint >= checkpoints.points.Length) // when the enemy hits the last point
@@ -41,5 +42,17 @@ public class Enemy : MonoBehaviour
             FindObjectOfType<LoseCondition>().lives--; // lose 1 life
             Destroy(gameObject); // destroy the enemy
         }
+    }
+
+    IEnumerator EnemyDying()
+    {
+        dying = true;
+        FindObjectOfType<GameManager>().gold += 5; // award player with gold
+        SoundEffects.instance.enemyDie.Play(); // play the enemy dying sound
+        anim.SetBool("dying", true); // play the dying animation
+        GetComponent<BoxCollider2D>().enabled = false; // disable any collider on the enemy
+        moveSpeed = 0; // stop the movement
+        yield return new WaitForSeconds(0.5f); // time it waits before dying
+        Destroy(gameObject); // destroy enemy
     }
 }

@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 8106588390154605471}
   - component: {fileID: 8106588390154605465}
   - component: {fileID: 8106588390154605470}
+  - component: {fileID: 5430131371461692271}
   m_Layer: 6
   m_Name: Orcenemy
   m_TagString: Untagged
@@ -478,6 +479,8 @@ MonoBehaviour:
   health: 3
   currentPoint: 0
   healthBar: {fileID: 3265889133979136169}
+  anim: {fileID: 5430131371461692271}
+  dying: 0
 --- !u!61 &8106588390154605465
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -525,3 +528,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &5430131371461692271
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8106588390154605458}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d606a644c3e5dcb468739211ae5cb56a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
