@@ -545,3 +545,5 @@ MonoBehaviour:
   health: 5
   currentPoint: 10
   healthBar: {fileID: 1293086391290110945}
+  anim: {fileID: 7214337434090016575}
+  dying: 0
