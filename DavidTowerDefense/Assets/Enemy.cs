@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     {
         checkpoints = FindObjectOfType<Checkpoints>(); // when the enemy spawns, they will find the checkpoints and know how to walk
         healthBar.maxValue = health; // set the new max value
+        FindObjectOfType<EnemySpawner>().remainingEnemies++; // add to how many enemies are alive
     }
 
     // Update is called once per frame
@@ -34,12 +35,13 @@ public class Enemy : MonoBehaviour
         if(health <= 0 && dying == false)
         {
             StartCoroutine(EnemyDying());
-            
+            FindObjectOfType<EnemySpawner>().remainingEnemies--;
         }
 
         if(currentPoint >= checkpoints.points.Length) // when the enemy hits the last point
         {
             FindObjectOfType<LoseCondition>().lives--; // lose 1 life
+            FindObjectOfType<EnemySpawner>().remainingEnemies--;
             Destroy(gameObject); // destroy the enemy
         }
     }

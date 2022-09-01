@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -49,5 +50,13 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(10);
         wave++; // wave number goes up by 1
         numberOfEnemiesToSpawn += wave * 5; // increase enemies by 5 every new wave, wave 1 = 5, wave 2 = 10, etc
+        if(wave > 25)
+        {
+            numberOfEnemiesToSpawn = 0; // we've won no more enemies need to spawn
+            if(remainingEnemies <= 0) // if we have killed every enemy
+            {
+                SceneManager.LoadScene("WinScreen"); // only load this scene
+            }
+        }
     }
 }
