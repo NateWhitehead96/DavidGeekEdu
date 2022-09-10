@@ -13,6 +13,8 @@ public class PauseMenu : MonoBehaviour
 
     public void MenuButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1;
+        FindObjectOfType<Transition>().MoveToScene(0); // transition us to main menu
     }
 }
