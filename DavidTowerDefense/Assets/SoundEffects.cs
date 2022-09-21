@@ -17,9 +17,14 @@ public class SoundEffects : MonoBehaviour
             DontDestroyOnLoad(gameObject); // dont destroy game object between levels
         }
     }
-
-    public AudioSource enemyDie;
+    // all of our different sound effects
+    [SerializeField] public AudioSource enemyDie;
     public AudioSource shootSound;
+    public AudioSource newWave;
+    public AudioSource towerBuild;
+    public AudioSource arrowShoot;
+    public AudioSource cannonShoot;
+    public AudioSource arcaneShoot;
     public float volume; // the volume of the things
     // Start is called before the first frame update
     void Start()
@@ -32,5 +37,10 @@ public class SoundEffects : MonoBehaviour
     {
         enemyDie.volume = volume;
         shootSound.volume = volume;
+        newWave.volume = volume;
+        towerBuild.volume = volume;
+        arrowShoot.volume = volume;
+        cannonShoot.volume = volume;
+        arcaneShoot.volume = volume;
     }
 }

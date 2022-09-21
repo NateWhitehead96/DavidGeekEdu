@@ -50,6 +50,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(10);
         wave++; // wave number goes up by 1
         numberOfEnemiesToSpawn += wave * 5; // increase enemies by 5 every new wave, wave 1 = 5, wave 2 = 10, etc
+        SoundEffects.instance.newWave.Play(); // play new wave sound
         if(wave > 25)
         {
             numberOfEnemiesToSpawn = 0; // we've won no more enemies need to spawn

@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
             }
             if(nearestTile.isOccupied == false) // if the tile doesnt have a tower
             {
+                SoundEffects.instance.towerBuild.Play(); // play a sound to build the tower
                 Building newTower = Instantiate(towerToPlace, nearestTile.transform.position, transform.rotation); // build our new tower
                 newTower.tile = nearestTile; // set the tile of the tower to the tile we place the tower on
                 towerToPlace = null; // reset the tower to place

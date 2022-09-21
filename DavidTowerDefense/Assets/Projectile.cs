@@ -22,7 +22,18 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(type == Type.Arrow)
+        {
+            SoundEffects.instance.arrowShoot.Play(); // play arrow sound when arrows are shot
+        }
+        if(type == Type.Cannon)
+        {
+            SoundEffects.instance.cannonShoot.Play(); // play cannon sound
+        }
+        if(type == Type.Sniper)
+        {
+            SoundEffects.instance.arcaneShoot.Play(); // play the arcane sound
+        }
     }
 
     // Update is called once per frame
