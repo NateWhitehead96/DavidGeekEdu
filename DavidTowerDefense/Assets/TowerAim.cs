@@ -9,10 +9,11 @@ public class TowerAim : MonoBehaviour
 
     public float reloadSpeed; // how often it shoots
     public float timer; // a counter to know when to shoot
+    //public float roundsPerMinute;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //roundsPerMinute = reloadSpeed / 60;
     }
 
     // Update is called once per frame
@@ -50,6 +51,11 @@ public class TowerAim : MonoBehaviour
             if(enemiesInRange.Count == 0) // no more enemies nearby
             {
                 // play shoot end sound
+                if(projectile.GetComponent<Projectile>().type == Type.Arrow)
+                {
+                    print("does this work?");
+                    SoundEffects.instance.arrowShoot.Stop();
+                }
             }
         }
     }
